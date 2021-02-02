@@ -1,3 +1,4 @@
+#後で確認のこと
 scores={70,80,55,80}
 scores.add(80) 
 print(scores)
