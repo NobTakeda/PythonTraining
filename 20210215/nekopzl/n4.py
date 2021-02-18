@@ -16,7 +16,20 @@ def draw_neko():
 	for y in range(10):
 		for x in range(8):
 			if neko[y][x]>0:
-				cvs.create_image(x*72+60,y*72+60,image=img_neko[neko[y][x]])
+				cvs.create_image(x*72+60,y*72+60,image=img_neko[neko[y][x]],tag="NEKO")
+
+def drop_neko():
+	for y in range(8,-1,-1):
+		for x in range(8):
+			if neko[y][x] != 0 and neko[y+1][x] ==0:
+				neko[y+1][x]=neko[y][x]
+				neko[y][x]=0
+
+def game_main():
+	drop_neko()
+	cvs.delete("NEKO")
+	draw_neko()
+	root.after(100,game_main)
 
 root=tk.Tk()
 root.title("二次元リストでマスを管理する")
@@ -37,5 +50,5 @@ img_neko=[
 ]
 
 cvs.create_image(456,384,image=bg)
-draw_neko()
+game_main()
 root.mainloop()
